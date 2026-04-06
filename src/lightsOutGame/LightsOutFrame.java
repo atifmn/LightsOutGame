@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -25,6 +26,8 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 	private JButton randomize;
 	private JButton manualSetup;
 	private boolean inManualSetup;
+	private JLabel winDisplay;
+	private int winCount;
 
 	/**
 	 * Constructor of the LightsOutFrame class, creates the buttons, the window, and
@@ -46,8 +49,11 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 			}
 		}
 
+		this.winCount = 0;
+
 		this.randomize = new JButton("Randomize");
 		this.manualSetup = new JButton("Enter Manual Setup");
+		this.winDisplay = new JLabel("Current wins = " + winCount);
 
 		this.randomize.addActionListener(this);
 		this.manualSetup.addActionListener(this);
@@ -56,6 +62,7 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 
 		otherPanel.add(this.randomize);
 		otherPanel.add(this.manualSetup);
+		otherPanel.add(winDisplay);
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -160,7 +167,12 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 		}
 
 		if (lightsOff() && this.inManualSetup == false) {
+			this.winCount += 1;
+			this.winDisplay.setText("Current wins = " + winCount);
+
 			JOptionPane.showMessageDialog(this, "Congratulations, You turned off all the lights!");
+
+			randomize();
 		}
 	}
 
