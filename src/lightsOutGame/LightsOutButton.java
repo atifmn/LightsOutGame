@@ -1,9 +1,11 @@
 package lightsOutGame;
 
+import java.awt.Dimension;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 
 /**
  * LightsOutButton class, subclass of JButton, creates the buttons for the
@@ -13,6 +15,9 @@ import javax.swing.JButton;
  * @version April 4, 2025
  */
 public class LightsOutButton extends JButton {
+
+	private static final int TILE_WIDTH = 96;
+	private static final int TILE_HEIGHT = 84;
 
 	private int row;
 	private int column;
@@ -35,14 +40,20 @@ public class LightsOutButton extends JButton {
 		this.isLightOn = false;
 
 		Image lightOffImg = this.lightOffIcon.getImage();
-		Image scaledlightOff = lightOffImg.getScaledInstance(130, 110, 1000);
+		Image scaledlightOff = lightOffImg.getScaledInstance(TILE_WIDTH, TILE_HEIGHT, Image.SCALE_SMOOTH);
 		this.lightOffIcon = new ImageIcon(scaledlightOff);
 
 		Image lightOnImg = this.lightOnIcon.getImage();
-		Image scaledlightOn = lightOnImg.getScaledInstance(130, 110, 1000);
+		Image scaledlightOn = lightOnImg.getScaledInstance(TILE_WIDTH, TILE_HEIGHT, Image.SCALE_SMOOTH);
 		this.lightOnIcon = new ImageIcon(scaledlightOn);
 
 		this.setIcon(lightOffIcon);
+		this.setPreferredSize(new Dimension(TILE_WIDTH, TILE_HEIGHT));
+		this.setBorder(BorderFactory.createEmptyBorder());
+		this.setBorderPainted(false);
+		this.setFocusPainted(false);
+		this.setContentAreaFilled(false);
+		this.setOpaque(false);
 	}
 
 	/**

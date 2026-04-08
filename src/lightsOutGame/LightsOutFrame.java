@@ -1,7 +1,10 @@
 package lightsOutGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.BorderFactory;
 
 /**
  * LightsOutFrame class, subclass of JFrame and implements action listener,
@@ -40,6 +44,8 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(5, 5, 2, 2));
+		panel.setBackground(new Color(225, 232, 240));
+		panel.setBorder(BorderFactory.createEmptyBorder(18, 18, 18, 18));
 
 		for (int row = 0; row < 5; row++) {
 			for (int col = 0; col < 5; col++) {
@@ -53,19 +59,27 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 
 		this.randomize = new JButton("Randomize");
 		this.manualSetup = new JButton("Enter Manual Setup");
-		this.winDisplay = new JLabel("Current wins = " + winCount);
+		this.winDisplay = new JLabel("Wins: " + winCount);
 
 		this.randomize.addActionListener(this);
 		this.manualSetup.addActionListener(this);
 
-		JPanel otherPanel = new JPanel();
+		styleControlButton(this.randomize, new Color(53, 94, 176));
+		styleControlButton(this.manualSetup, new Color(64, 138, 109));
+		this.winDisplay.setFont(new Font("SansSerif", Font.BOLD, 16));
+		this.winDisplay.setForeground(new Color(58, 68, 84));
 
+		JPanel otherPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 14, 12));
+		otherPanel.setBackground(new Color(245, 247, 250));
+		otherPanel.setBorder(BorderFactory.createEmptyBorder(0, 12, 12, 12));
 		otherPanel.add(this.randomize);
 		otherPanel.add(this.manualSetup);
 		otherPanel.add(winDisplay);
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setBackground(new Color(245, 247, 250));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(14, 14, 14, 14));
 		mainPanel.add(panel, BorderLayout.CENTER);
 		mainPanel.add(otherPanel, BorderLayout.SOUTH);
 
@@ -168,12 +182,20 @@ public class LightsOutFrame extends JFrame implements ActionListener {
 
 		if (lightsOff() && this.inManualSetup == false) {
 			this.winCount += 1;
-			this.winDisplay.setText("Current wins = " + winCount);
+			this.winDisplay.setText("Wins: " + winCount);
 
 			JOptionPane.showMessageDialog(this, "Congratulations, You turned off all the lights!");
 
 			randomize();
 		}
+	}
+
+	private void styleControlButton(JButton button, Color backgroundColor) {
+		button.setBackground(backgroundColor);
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("SansSerif", Font.BOLD, 14));
+		button.setFocusPainted(false);
+		button.setBorder(BorderFactory.createEmptyBorder(10, 16, 10, 16));
 	}
 
 	/**
