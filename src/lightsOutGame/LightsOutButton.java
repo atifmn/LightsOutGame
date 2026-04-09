@@ -16,14 +16,14 @@ import javax.swing.BorderFactory;
  */
 public class LightsOutButton extends JButton {
 
-	private static final int TILE_WIDTH = 96;
-	private static final int TILE_HEIGHT = 84;
+	private static final int TILE_WIDTH = 152;
+	private static final int TILE_HEIGHT = 134;
 
 	private int row;
 	private int column;
 	private boolean isLightOn;
-	private ImageIcon lightOnIcon = new ImageIcon("src/lightsOutGame/light_on.jpg");
-	private ImageIcon lightOffIcon = new ImageIcon("src/lightsOutGame/light_off.jpg");
+	private ImageIcon lightOnIcon = new ImageIcon("src/lightsOutGame/lightOn.png");
+	private ImageIcon lightOffIcon = new ImageIcon("src/lightsOutGame/lightOff.png");
 
 	/**
 	 * Constructor of the LightsOutButton class, initializes the button based on the
